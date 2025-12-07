@@ -1,68 +1,89 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './DLModelPage.css';
+import './model.css';
 
 const LLMpage = () => {
-    const [image, setImage] = useState(null);
-    const [caption, setCaption] = useState('');
-    const [preview, setPreview] = useState(null);
+  const [image, setImage] = useState(null);
+  const [caption, setCaption] = useState('');
+  const [preview, setPreview] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        setImage(file);
-        setPreview(URL.createObjectURL(file));
-    };
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
+    setPreview(URL.createObjectURL(file));
+    setCaption('');
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (!image) {
-            alert('Please select an image.');
-            return;
-        }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!image) {
+      alert("Please upload an image first!");
+      return;
+    }
 
-        const formData = new FormData();
-        formData.append('file', image);
+    const formData = new FormData();
+    formData.append("file", image);
+    setLoading(true);
 
-        try {
-            const res = await axios.post('http://127.0.0.1:5000/predictnlp', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-            setCaption(res.data.caption);
-        } catch (err) {
-            console.error(err);
-        }
-    };
+    try {
+      const res = await axios.post("http://127.0.0.1:5000/predictnlp", formData);
+      setCaption(res.data.caption);
+    } catch (err) {
+      console.error(err);
+      alert("Error generating caption");
+    }
 
-   /* return (
-        <div className="App">
-            <h1>Image Captioning</h1>
-            <form onSubmit={handleSubmit}>
-                <input type="file" accept="image/*" onChange={handleImageChange} />
-                <button type="submit">Upload and Predict</button>
-            </form>
-            {caption && <p>Caption: {caption}</p>}
-        </div>
-    );*/
+    setLoading(false);
+  };
 
-    return (
-        <div className="container">
-            <h1>Image Captioning</h1>
-            <form onSubmit={handleSubmit}>
-                <input type="file" onChange={handleImageChange} />
-                <button type="submit">Upload and Predict</button>
-            </form>
-            {preview && (
-                <div className='preview'>
-                    <h2>Preview:</h2>
-                    <img src={preview} alt="Image Preview" style={{ maxWidth: '30%', height: '30' }} />
-                </div>
-            )}
-            {caption && <div className='caption'>Caption: {caption}</div>}
-        </div>
-    );
-  
-}
+  const resetUpload = () => {
+    setImage(null);
+    setPreview(null);
+    setCaption('');
+  };
 
-export default LLMpage
+  return (
+    <div className={`page-container ${caption ? "reduced-gap" : ""}`}>
+      <div className="card">
+
+        <h1>Image Captioning</h1>
+
+        {!caption && (
+          <form onSubmit={handleSubmit}>
+            <label className="upload-box">
+              <input type="file" accept="image/*" onChange={handleImageChange} />
+              <span>Click to Upload X-ray Image</span>
+            </label>
+
+            <button type="submit" className="primary-btn">
+              {loading ? "Generating..." : "Upload & Predict"}
+            </button>
+          </form>
+        )}
+
+        {preview && (
+          <div className="preview">
+            <h3>Preview:</h3>
+            <img src={preview} alt="Uploaded" className="preview-img" />
+          </div>
+        )}
+
+        {caption && (
+          <>
+            <div className="caption-box">
+              <strong>Caption:</strong> {caption}
+            </div>
+
+            <button className="upload-again-btn" onClick={resetUpload}>
+              Upload Another Image
+            </button>
+          </>
+        )}
+
+      </div>
+    </div>
+  );
+};
+
+export default LLMpage;

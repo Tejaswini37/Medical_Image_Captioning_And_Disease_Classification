@@ -1,25 +1,19 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import {BrowserRouter,Routes,Route} from 'react-router-dom'
-
-import Home from './components/Home'
-
-import DLModelPage from './components/DLModelPage'
-import LLMpage from './components/LLMpage'
+import Home from "./components/Home";
+import LLMpage from "./components/LLMpage";
+import Navbar from "./components/Navbar";
 
 function App() {
-  return(
+  return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
-        {/* <Route path='/signup' element={<Signup/>}></Route> */}
-        {/* <Route path='/' element={<Login/>}></Route> */}
-        {/* <Route path='/home' element={<Home/>}></Route> */}
-        {/* <Route path='/otp' element={<Otp/>}></Route> */}
-        <Route path='/' element={<Home/>}></Route>
-        <Route path='/dlmodel' element={<DLModelPage/>}></Route>
-        <Route path='/llmmodel' element={<LLMpage/>}></Route>
+        <Route path="/" element={<Home />} />
+        <Route path="/llmmodel" element={<LLMpage />} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
 export default App;

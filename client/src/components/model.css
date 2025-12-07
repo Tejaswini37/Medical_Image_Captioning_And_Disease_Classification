@@ -1,0 +1,191 @@
+/* -------- GLOBAL -------- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #f7f9ff;
+}
+
+/* -------- PAGE LAYOUT -------- */
+.page-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 40px;
+}
+
+/* When caption appears → reduce gap */
+.reduced-gap {
+  padding-top: 15px !important;
+}
+
+/* -------- NAVBAR -------- */
+.navbar {
+  width: 100%;
+  height: 60px;
+  background: #0d6efd;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 30px;
+  box-sizing: border-box;
+}
+
+.logo {
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.nav-links a:hover {
+  opacity: 0.8;
+}
+
+/* -------- CARD (Glassmorphism) -------- */
+.card {
+  width: 60%;
+  padding: 35px 45px;
+
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+/* Headings */
+h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+/* -------- UPLOAD BOX -------- */
+.upload-box {
+  width: 70%;
+  border: 2px dashed #007bff;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 22px auto;
+  cursor: pointer;
+
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+
+  transition: 0.25s ease-in-out;
+}
+
+.upload-box:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.upload-box input {
+  display: none;
+}
+
+.upload-box span {
+  font-size: 16px;
+  color: #007bff;
+}
+
+/* -------- BUTTONS -------- */
+.primary-btn {
+  padding: 12px 25px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+
+  margin-top: 10px;
+  transition: 0.25s ease-in-out;
+}
+
+.primary-btn:hover {
+  background: #0056b3;
+  box-shadow: 0 4px 10px rgba(0, 86, 179, 0.4);
+}
+
+.upload-again-btn {
+  margin-top: 18px;
+  padding: 10px 22px;
+
+  background: white;
+  color: #0d6efd;
+
+  border: 2px solid #0d6efd;
+  border-radius: 8px;
+
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+
+  transition: 0.25s ease-in-out;
+}
+
+.upload-again-btn:hover {
+  background: #0d6efd;
+  color: white;
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4);
+}
+
+/* -------- PREVIEW -------- */
+.preview h3 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.preview-img {
+  width: 260px;
+  border-radius: 12px;
+  margin-top: 5px;
+
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* -------- CAPTION -------- */
+.caption-box {
+  width: 75%;
+  margin: 12px auto 0 auto;
+
+  padding: 18px 20px;
+  background: #eef6ff;
+  border-left: 6px solid #007bff;
+  border-radius: 10px;
+
+  font-size: 17px;
+  font-weight: 500;
+  color: #003b7a;
+
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
